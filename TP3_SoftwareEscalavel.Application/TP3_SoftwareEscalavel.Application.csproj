@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="RestSharp" Version="106.13.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TP3_SoftwareEscalavel.Infrastructure\TP3_SoftwareEscalavel.Infrastructure.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TP3_SoftwareEscalavel.Application.InputModel;
 using TP3_SoftwareEscalavel.Application.Services.Implementations;
+using TP3_SoftwareEscalavel.Application.Services.Integration;
 using TP3_SoftwareEscalavel.Application.Services.Interfaces;
 
 namespace Professor.API.Controllers
@@ -10,10 +11,12 @@ namespace Professor.API.Controllers
     {
         private readonly IProfessorService _professorService;
         private readonly IChamadaService _chamadaService;
-        public ProfessorController(IProfessorService professorService, IChamadaService chamadaService)
+        private readonly IAlunoIntegration _alunoIntegration;
+        public ProfessorController(IProfessorService professorService, IChamadaService chamadaService,IAlunoIntegration alunoIntegration)
         {
             _professorService = professorService;
             _chamadaService = chamadaService;
+            _alunoIntegration = alunoIntegration;
         }
 
         [HttpGet]
@@ -98,6 +101,15 @@ namespace Professor.API.Controllers
             return Ok(chamada);
         }
 
-        
+        [HttpPost("/chamada/aluno/{idAluno}")]
+        public IActionResult PostAlunoIsPresent(int idAluno)
+        {
+            if (!_alunoIntegration.AlunoIsPresent(idAluno))
+            {
+                return NotFound();
+            }
+
+            return Ok($"Aluno {idAluno} Presente");
+        }
     }
 }

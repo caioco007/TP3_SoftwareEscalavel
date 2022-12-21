@@ -9,6 +9,6 @@ namespace TP3_SoftwareEscalavel.Application.InputModel
     public class UpdateDadosChamadaInputModel
     {
         public int IdAluno { get; set; }
-        public bool IsPresent { get; set; }
+        public bool IsPresent => true;
     }
 }

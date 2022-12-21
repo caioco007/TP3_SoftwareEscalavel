@@ -88,13 +88,13 @@ namespace TP3_SoftwareEscalavel.Application.Services.Implementations
             return dadosChamadas;
         }
 
-        public void AlterIsPresent(UpdateDadosChamadaInputModel inputModel)
+        public void AlterIsPresent(int idAluno)
         {
             var dadosChamadas = _dbContext.Chamadas.FirstOrDefault(p => p.DataCriacao.Date == DateTime.Now.Date).DadosChamadas;
 
-            var aluno = dadosChamadas.SingleOrDefault(x => x.IdAluno == inputModel.IdAluno);
+            var aluno = dadosChamadas.SingleOrDefault(x => x.IdAluno == idAluno);
 
-            aluno.Update(inputModel.IsPresent);
+            aluno.UpdateIsPresent(true);
         }
 
     }

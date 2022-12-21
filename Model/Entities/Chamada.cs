@@ -31,7 +31,7 @@ namespace TP3_SoftwareEscalavel.Core.Entities
         public int IdAluno { get; set; }
         public bool IsPresent { get; set; }
 
-        public void Update(bool isPresent)
+        public void UpdateIsPresent(bool isPresent)
         {
             IsPresent = isPresent;
         }

@@ -71,12 +71,12 @@ namespace Aluno.API.Controllers
             return NoContent();
         }
 
-        [HttpPut("/chamada")]
-        public IActionResult PutChamada([FromBody] UpdateDadosChamadaInputModel inputModel)
+        [HttpPost("{idAluno}/chamada/presente")]
+        public IActionResult PostChamadaIsPresent(int idAluno)
         {
-            _chamadaService.AlterIsPresent(inputModel);
+            _chamadaService.AlterIsPresent(idAluno);
 
-            return NoContent();
+            return Ok($"Aluno {idAluno} presente.");
         }
 
         [HttpGet("/chamada/{idAluno}")]
