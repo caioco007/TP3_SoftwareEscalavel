@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TP3_SoftwareEscalavel.Application.InputModel;
-using TP3_SoftwareEscalavel.Application.Services.Implementations;
 using TP3_SoftwareEscalavel.Application.Services.Integration;
 using TP3_SoftwareEscalavel.Application.Services.Interfaces;
 

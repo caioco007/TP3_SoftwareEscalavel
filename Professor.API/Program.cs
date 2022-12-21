@@ -1,4 +1,4 @@
-using TP3_SoftwareEscalavel.Application.Services.Implementations;
+using Microsoft.EntityFrameworkCore;
 using TP3_SoftwareEscalavel.Application.Services.Integration;
 using TP3_SoftwareEscalavel.Application.Services.Interfaces;
 using TP3_SoftwareEscalavel.Infrastructure.Persistence;
@@ -9,9 +9,9 @@ var connectionString = builder.Configuration.GetConnectionString("TP3Microsservi
 builder.Services.AddDbContext<TP3MicrosservicoDbContext>(options => options.UseSqlServer(connectionString));
 
 
-builder.Services.AddScoped<IProfessorService, ProfessorService>();
-builder.Services.AddScoped<IChamadaService, ChamadaService>();
-builder.Services.AddScoped<IAlunoService, AlunoService>();
+//builder.Services.AddScoped<IProfessorService, ProfessorService>();
+//builder.Services.AddScoped<IChamadaService, ChamadaService>();
+//builder.Services.AddScoped<IAlunoService, AlunoService>();
 builder.Services.AddScoped<IAlunoIntegration, AlunoIntegration>();
 
 // Add services to the container.

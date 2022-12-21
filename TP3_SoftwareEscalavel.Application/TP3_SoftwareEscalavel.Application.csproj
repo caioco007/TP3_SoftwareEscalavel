@@ -14,4 +14,8 @@
     <ProjectReference Include="..\TP3_SoftwareEscalavel.Infrastructure\TP3_SoftwareEscalavel.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Implementations\" />
+  </ItemGroup>
+
 </Project>

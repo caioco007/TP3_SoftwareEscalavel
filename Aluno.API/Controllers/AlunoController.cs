@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TP3_SoftwareEscalavel.Application.InputModel;
-using TP3_SoftwareEscalavel.Application.Services.Implementations;
 using TP3_SoftwareEscalavel.Application.Services.Interfaces;
 
 namespace Aluno.API.Controllers
@@ -82,14 +81,15 @@ namespace Aluno.API.Controllers
         [HttpGet("/chamada/{idAluno}")]
         public IActionResult GetChamadaNow(int idAluno)
         {
-            var chamada =  _chamadaService.GetAllByAlunoIdNow(idAluno);
+            //var chamada =  _chamadaService.GetAllByAlunoIdNow(idAluno);
 
-            if (chamada == null)
-            {
-                return NotFound();
-            }
+            //if (chamada == null)
+            //{
+            //    return NotFound();
+            //}
 
-            return Ok(chamada);
+            //return Ok(chamada);
+            return NotFound();
         }
     }
 }

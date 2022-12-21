@@ -11,9 +11,10 @@ namespace TP3_SoftwareEscalavel.Core.Entities
         public Professor(string nome)
         {
             Nome = nome;
+            Disciplinas = new List<Disciplina>();
         }
-        public int Id { get; set; }
         public string Nome { get; set; }
+        public List<Disciplina> Disciplinas { get; set; }
 
         public void Update(string nome)
         {

@@ -15,8 +15,8 @@ namespace TP3_SoftwareEscalavel.Application.Services.Interfaces
         ChamadaViewModel GetById(int id);
         //List<ChamadaViewModel> GetAllByAlunoId(int idAluno);
         int Create();
-        List<DadosChamada> GetDadosChamada();
+        //List<DadosChamada> GetDadosChamada();
         void AlterIsPresent(int idAluno);
-        DadosChamada GetAllByAlunoIdNow(int idAluno);
+        //DadosChamada GetAllByAlunoIdNow(int idAluno);
     }
 }

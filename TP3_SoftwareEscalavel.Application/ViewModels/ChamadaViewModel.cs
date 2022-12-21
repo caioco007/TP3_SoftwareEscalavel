@@ -9,15 +9,13 @@ namespace TP3_SoftwareEscalavel.Application.ViewModels
 {
     public class ChamadaViewModel
     {
-        public ChamadaViewModel(int id, DateTime dataCriacao, List<DadosChamada> dadosChamadas)
+        public ChamadaViewModel(int id, DateTime dataCriacao)
         {
             Id = id;
             DataCriacao = DateTime.Now;
-            DadosChamadas = dadosChamadas;
         }
 
         public int Id { get; set; }
         public DateTime DataCriacao { get; set; }
-        public List<DadosChamada> DadosChamadas { get; set; }
     }
 }

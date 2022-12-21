@@ -1,14 +1,15 @@
-using TP3_SoftwareEscalavel.Application.Services.Implementations;
+using Microsoft.EntityFrameworkCore;
 using TP3_SoftwareEscalavel.Application.Services.Interfaces;
 using TP3_SoftwareEscalavel.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<AlunoDbContext>();
-builder.Services.AddSingleton<ChamadaDbContext>();
+var connectionString = builder.Configuration.GetConnectionString("TP3Microsservico");
+builder.Services.AddDbContext<TP3MicrosservicoDbContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddScoped<IAlunoService, AlunoService>();
-builder.Services.AddScoped<IChamadaService, ChamadaService>();
+
+//builder.Services.AddScoped<IAlunoService, AlunoService>();
+//builder.Services.AddScoped<IChamadaService, ChamadaService>();
 // Add services to the container.
 
 builder.Services.AddControllers();
