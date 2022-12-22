@@ -5,15 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using TP3_SoftwareEscalavel.Application.InputModel;
 using TP3_SoftwareEscalavel.Application.ViewModels;
-using TP3_SoftwareEscalavel.Core.Entities;
 
 namespace TP3_SoftwareEscalavel.Application.Services.Interfaces
 {
-    public interface IChamadaService
+    public interface IDisciplinaAlunosService
     {
-        List<ChamadaViewModel> GetAll();
-        ChamadaViewModel GetById(int id);
-        int Create(NewChamadaInputModel inputModel);
+        DisciplinaAlunosViewModel GetById(int id);
+        int Create(NewDisciplinaAlunosInputModel inputModel);
         void Delete(int id);
     }
 }

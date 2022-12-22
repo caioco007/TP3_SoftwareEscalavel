@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace TP3_SoftwareEscalavel.Application.InputModel
 {
-    public class NewProfessorInputModel
+    public class NewDisciplinaInputModel
     {
         public string Nome { get; set; }
+        public int IdProfessor { get; set; }
     }
 }

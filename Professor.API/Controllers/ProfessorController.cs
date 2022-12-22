@@ -82,9 +82,10 @@ namespace Professor.API.Controllers
         [HttpPost("/chamada")]
         public IActionResult PostChamada()
         {
-            var id = _chamadaService.Create();
+            //var id = _chamadaService.Create();
 
-            return RedirectToAction(nameof(GetChamadaById), new { id = id });
+            //return RedirectToAction(nameof(GetChamadaById), new { id = id });
+            return NoContent();
         }
 
         [HttpGet("/chamada/{id}")]

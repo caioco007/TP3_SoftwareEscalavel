@@ -11,6 +11,8 @@ namespace TP3_SoftwareEscalavel.Infrastructure.Persistence
 
         }
         public DbSet<Aluno> Alunos { get; set; }
+        public DbSet<Atividade> Atividades { get; set; }
+        public DbSet<AtividadeAluno> AtividadeAlunos { get; set; }
         public DbSet<Chamada> Chamadas { get; set; }
         public DbSet<Disciplina> Disciplinas { get; set; }
         public DbSet<DisciplinaAluno> DisciplinaAlunos { get; set; }

@@ -73,7 +73,7 @@ namespace Aluno.API.Controllers
         [HttpPost("{idAluno}/chamada/presente")]
         public IActionResult PostChamadaIsPresent(int idAluno)
         {
-            _chamadaService.AlterIsPresent(idAluno);
+            //_chamadaService.Create(idAluno);
 
             return Ok($"Aluno {idAluno} presente.");
         }

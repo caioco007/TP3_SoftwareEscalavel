@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TP3_SoftwareEscalavel.Infrastructure.Persistence;
 
@@ -11,9 +12,10 @@ using TP3_SoftwareEscalavel.Infrastructure.Persistence;
 namespace TP3_SoftwareEscalavel.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(TP3MicrosservicoDbContext))]
-    partial class TP3MicrosservicoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221222030209_SecondMigration")]
+    partial class SecondMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
