@@ -15,6 +15,10 @@ namespace TP3_SoftwareEscalavel.Infrastructure.Persistence.Configurations
         {
             builder
                 .HasKey(c => c.Id);
+
+            builder
+                .HasIndex(k => new { k.IdDisciplina, k.IdAluno})
+                .IsUnique(true);
         }
     }
 }

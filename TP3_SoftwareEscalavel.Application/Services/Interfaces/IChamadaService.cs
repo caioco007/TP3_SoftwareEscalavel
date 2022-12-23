@@ -15,5 +15,6 @@ namespace TP3_SoftwareEscalavel.Application.Services.Interfaces
         ChamadaViewModel GetById(int id);
         int Create(NewChamadaInputModel inputModel);
         void Delete(int id);
+        List<ChamadaViewModel> GetByDataCriacao(DateTime datacriacao);
     }
 }

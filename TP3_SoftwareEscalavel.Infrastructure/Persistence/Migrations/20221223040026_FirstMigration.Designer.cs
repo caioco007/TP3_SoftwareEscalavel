@@ -12,8 +12,8 @@ using TP3_SoftwareEscalavel.Infrastructure.Persistence;
 namespace TP3_SoftwareEscalavel.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(TP3MicrosservicoDbContext))]
-    [Migration("20221222030209_SecondMigration")]
-    partial class SecondMigration
+    [Migration("20221223040026_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -159,6 +159,9 @@ namespace TP3_SoftwareEscalavel.Infrastructure.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IdAluno");
+
+                    b.HasIndex("IdDisciplina", "IdAluno")
+                        .IsUnique();
 
                     b.ToTable("DisciplinaAlunos");
                 });

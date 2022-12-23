@@ -36,13 +36,13 @@ namespace TP3_SoftwareEscalavel.Application.Services.Implementations
             _dbContext.SaveChanges();
         }
 
-        public DisciplinaAlunosViewModel GetById(int id)
+        public List<DisciplinaAlunosViewModel> GetById(int idDisciplina)
         {
             var disciplinaAlunoViewModel = (from da in _dbContext.DisciplinaAlunos
                                        join a in _dbContext.Alunos on da.IdAluno equals a.Id
                                        join d in _dbContext.Disciplinas on da.IdDisciplina equals d.Id
-                                            where da.Id == id
-                                       select new DisciplinaAlunosViewModel
+                                            where da.IdDisciplina == idDisciplina
+                                            select new DisciplinaAlunosViewModel
                                        {
                                            Id = da.Id,
                                            Nome = d.Nome,
@@ -51,7 +51,7 @@ namespace TP3_SoftwareEscalavel.Application.Services.Implementations
                                        });
 
 
-            return disciplinaAlunoViewModel.FirstOrDefault();
+            return disciplinaAlunoViewModel.ToList();
         }
     }
 }

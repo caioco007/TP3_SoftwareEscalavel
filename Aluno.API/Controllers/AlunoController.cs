@@ -9,10 +9,14 @@ namespace Aluno.API.Controllers
     {
         private readonly IAlunoService _alunoService;
         private readonly IChamadaService _chamadaService;
-        public AlunoController(IAlunoService alunoService, IChamadaService chamadaService)
+        private readonly IAtividadeService _atividadeService;
+        private readonly IAtividadeAlunosService _atividadeAlunosService;
+        public AlunoController(IAlunoService alunoService, IChamadaService chamadaService, IAtividadeService atividadeService, IAtividadeAlunosService atividadeAlunosService)
         {
             _alunoService = alunoService;
             _chamadaService = chamadaService;
+            _atividadeService = atividadeService;
+            _atividadeAlunosService = atividadeAlunosService;
         }
 
         [HttpGet]
@@ -70,26 +74,36 @@ namespace Aluno.API.Controllers
             return NoContent();
         }
 
-        [HttpPost("{idAluno}/chamada/presente")]
-        public IActionResult PostChamadaIsPresent(int idAluno)
+        [HttpPost("/chamada/presente")]
+        public IActionResult PostChamadaIsPresent([FromBody] NewChamadaInputModel inputModel)
         {
-            //_chamadaService.Create(idAluno);
+            _chamadaService.Create(inputModel);
 
-            return Ok($"Aluno {idAluno} presente.");
+            return Ok($"Aluno {inputModel.IdAluno} presente.");
         }
 
-        [HttpGet("/chamada/{idAluno}")]
-        public IActionResult GetChamadaNow(int idAluno)
+        [HttpPost("/atividade/aluno")]
+        public IActionResult PostAtividadeAluno([FromBody] NewAtividadeAlunoInputModel inputModel)
         {
-            //var chamada =  _chamadaService.GetAllByAlunoIdNow(idAluno);
+            _atividadeAlunosService.Create(inputModel);
 
-            //if (chamada == null)
-            //{
-            //    return NotFound();
-            //}
+            return Ok($"Aluno {inputModel.IdAluno} entregou a ativide {inputModel.IdAtividade}.");
+        }
 
-            //return Ok(chamada);
-            return NotFound();
+        [HttpGet("/atividade/aluno/{idAluno}")]
+        public IActionResult GetAtividadeByIdAluno(int idAluno)
+        {
+            var atividades = _atividadeService.GetByIdAluno(idAluno);
+
+            return Ok(atividades);
+        }
+
+        [HttpGet("/atividade/{idAtividade}/aluno/{idAluno}")]
+        public IActionResult GetAtividadeAluno(int idAtividade, int idAluno)
+        {
+            var atividade = _atividadeAlunosService.GetByIdAlunoAndIdAtividade(idAtividade, idAluno);
+
+            return Ok(atividade);
         }
     }
 }

@@ -20,5 +20,11 @@ namespace TP3_SoftwareEscalavel.Core.Entities
         public string Nome { get; private set; }
         public DateTime DataInicioEntrega { get; private set; }
         public DateTime DataFinalEntrega { get; private set; }
+
+        public void Update(string nome, DateTime dataFinalEntrega)
+        {
+            Nome = nome;
+            DataFinalEntrega = dataFinalEntrega;
+        }
     }
 }

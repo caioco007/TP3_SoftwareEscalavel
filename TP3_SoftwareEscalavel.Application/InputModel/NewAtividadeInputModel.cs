@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace TP3_SoftwareEscalavel.Application.InputModel
 {
-    public class NewAlunoInputModel
+    public class NewAtividadeInputModel
     {
         public string Nome { get; set; }
+        public int idDisciplina { get; set; }
+        public DateTime DataFinalEntrega { get; set; }
     }
 }

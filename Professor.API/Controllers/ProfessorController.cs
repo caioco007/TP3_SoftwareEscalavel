@@ -2,6 +2,7 @@
 using TP3_SoftwareEscalavel.Application.InputModel;
 using TP3_SoftwareEscalavel.Application.Services.Integration;
 using TP3_SoftwareEscalavel.Application.Services.Interfaces;
+using TP3_SoftwareEscalavel.Core.Entities;
 
 namespace Professor.API.Controllers
 {
@@ -10,12 +11,16 @@ namespace Professor.API.Controllers
     {
         private readonly IProfessorService _professorService;
         private readonly IChamadaService _chamadaService;
+        private readonly IAtividadeService _atividadeService;
+        private readonly IAtividadeAlunosService _atividadeAlunosService;
         private readonly IAlunoIntegration _alunoIntegration;
-        public ProfessorController(IProfessorService professorService, IChamadaService chamadaService,IAlunoIntegration alunoIntegration)
+        public ProfessorController(IProfessorService professorService, IChamadaService chamadaService, IAtividadeService atividadeService, IAlunoIntegration alunoIntegration, IAtividadeAlunosService atividadeAlunosService)
         {
             _professorService = professorService;
             _chamadaService = chamadaService;
+            _atividadeService = atividadeService;
             _alunoIntegration = alunoIntegration;
+            _atividadeAlunosService = atividadeAlunosService;
         }
 
         [HttpGet]
@@ -79,19 +84,16 @@ namespace Professor.API.Controllers
             return Ok(chamadas);
         }
 
-        [HttpPost("/chamada")]
-        public IActionResult PostChamada()
+        [HttpGet("/chamada/{dataCriacao}")]
+        public IActionResult GetChamadaByDataCriacao(string dataCriacao)
         {
-            //var id = _chamadaService.Create();
 
-            //return RedirectToAction(nameof(GetChamadaById), new { id = id });
-            return NoContent();
-        }
+            DateTime? dataFormatada = null;
+            if (DateTime.TryParse(dataCriacao, out var data)) dataFormatada = data;
 
-        [HttpGet("/chamada/{id}")]
-        public IActionResult GetChamadaById(int id)
-        {
-            var chamada = _chamadaService.GetById(id);
+            if (!dataFormatada.HasValue) return NotFound("Data em formato inválido");
+
+            var chamada = _chamadaService.GetByDataCriacao(dataFormatada.Value);
 
             if (chamada == null)
             {
@@ -101,15 +103,44 @@ namespace Professor.API.Controllers
             return Ok(chamada);
         }
 
-        [HttpPost("/chamada/aluno/{idAluno}")]
-        public IActionResult PostAlunoIsPresent(int idAluno)
+        [HttpPost("/chamada/aluno")]
+        public IActionResult PostAlunoIsPresent([FromBody] NewChamadaInputModel inputModel)
         {
-            if (!_alunoIntegration.AlunoIsPresent(idAluno))
+            if (!_alunoIntegration.AlunoIsPresent(inputModel))
             {
                 return NotFound();
             }
 
-            return Ok($"Aluno {idAluno} Presente");
+            return Ok($"Aluno {inputModel.IdAluno} da Disciplina {inputModel.IdDisciplina} Presente.");
+        }
+
+        [HttpPost("/atividade")]
+        public IActionResult PostAtividade([FromBody] NewAtividadeInputModel inputModel)
+        {
+            var id = _atividadeService.Create(inputModel);
+            
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok($"Atividade '{inputModel.Nome}' criado com sucesso.");
+        }
+
+        [HttpGet("/atividade/professor/{idProfessor}")]
+        public IActionResult GetAtividadeAlunoByIdProfessor(int idProfessor)
+        {
+            var atividadeAlunos = _atividadeAlunosService.GetAtividadesByProfessor(idProfessor);
+
+            return Ok(atividadeAlunos);
+        }
+
+        [HttpPost("/atividade/aluno/ponto")]
+        public IActionResult PostAtividadeSetPoint([FromBody]UpdateAtividadeAlunoInputModel inputModel)
+        {
+            _atividadeAlunosService.UpdateNota(inputModel);
+
+            return Ok();
         }
     }
 }

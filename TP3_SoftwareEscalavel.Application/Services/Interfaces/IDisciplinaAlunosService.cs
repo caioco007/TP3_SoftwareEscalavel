@@ -10,7 +10,7 @@ namespace TP3_SoftwareEscalavel.Application.Services.Interfaces
 {
     public interface IDisciplinaAlunosService
     {
-        DisciplinaAlunosViewModel GetById(int id);
+        List<DisciplinaAlunosViewModel> GetById(int idDisciplina);
         int Create(NewDisciplinaAlunosInputModel inputModel);
         void Delete(int id);
     }

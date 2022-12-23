@@ -158,6 +158,9 @@ namespace TP3_SoftwareEscalavel.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("IdAluno");
 
+                    b.HasIndex("IdDisciplina", "IdAluno")
+                        .IsUnique();
+
                     b.ToTable("DisciplinaAlunos");
                 });
 

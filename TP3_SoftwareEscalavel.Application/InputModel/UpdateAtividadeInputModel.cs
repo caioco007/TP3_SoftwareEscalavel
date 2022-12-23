@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace TP3_SoftwareEscalavel.Application.InputModel
 {
-    public class UpdateDadosChamadaInputModel
+    public class UpdateAtividadeInputModel
     {
-        public int IdAluno { get; set; }
-        public bool IsPresent => true;
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public DateTime DataFinalEntrega { get; set; }
+
     }
 }

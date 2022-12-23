@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TP3_SoftwareEscalavel.Infrastructure.Persistence.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,6 +20,38 @@ namespace TP3_SoftwareEscalavel.Infrastructure.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Alunos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AtividadeAlunos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdAtividade = table.Column<int>(type: "int", nullable: false),
+                    IdAluno = table.Column<int>(type: "int", nullable: false),
+                    DataEntrega = table.Column<DateTime>(type: "Date", nullable: false),
+                    Nota = table.Column<decimal>(type: "decimal", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AtividadeAlunos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Atividades",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdDisciplina = table.Column<int>(type: "int", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataInicioEntrega = table.Column<DateTime>(type: "Date", nullable: false),
+                    DataFinalEntrega = table.Column<DateTime>(type: "Date", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Atividades", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -83,12 +115,18 @@ namespace TP3_SoftwareEscalavel.Infrastructure.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_DisciplinaAlunos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DisciplinaAlunos_Disciplinas_IdAluno",
+                        name: "FK_DisciplinaAlunos_Alunos_IdAluno",
                         column: x => x.IdAluno,
-                        principalTable: "Disciplinas",
+                        principalTable: "Alunos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AtividadeAlunos_IdAtividade_IdAluno",
+                table: "AtividadeAlunos",
+                columns: new[] { "IdAtividade", "IdAluno" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Chamadas_DataCriacao_IdDisciplina_IdAluno",
@@ -102,6 +140,12 @@ namespace TP3_SoftwareEscalavel.Infrastructure.Persistence.Migrations
                 column: "IdAluno");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DisciplinaAlunos_IdDisciplina_IdAluno",
+                table: "DisciplinaAlunos",
+                columns: new[] { "IdDisciplina", "IdAluno" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Disciplinas_IdProfessor",
                 table: "Disciplinas",
                 column: "IdProfessor");
@@ -111,6 +155,12 @@ namespace TP3_SoftwareEscalavel.Infrastructure.Persistence.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Alunos");
+
+            migrationBuilder.DropTable(
+                name: "AtividadeAlunos");
+
+            migrationBuilder.DropTable(
+                name: "Atividades");
 
             migrationBuilder.DropTable(
                 name: "Chamadas");

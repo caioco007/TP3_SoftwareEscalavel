@@ -74,5 +74,24 @@ namespace TP3_SoftwareEscalavel.Application.Services.Implementations
 
             return chamadaViewModel.FirstOrDefault();
         }
+
+        public List<ChamadaViewModel> GetByDataCriacao(DateTime datacriacao)
+        {
+            var chamadaViewModel = (from c in _dbContext.Chamadas
+                                    join a in _dbContext.Alunos on c.IdAluno equals a.Id
+                                    join d in _dbContext.Disciplinas on c.IdDisciplina equals d.Id
+                                    where c.DataCriacao.Date == datacriacao.Date
+                                    select new ChamadaViewModel
+                                    {
+                                        Id = c.Id,
+                                        DataCriacao = c.DataCriacao,
+                                        IdDisciplina = c.IdDisciplina,
+                                        DisciplinaNome = d.Nome,
+                                        IdAluno = c.IdAluno,
+                                        AlunoNome = a.Nome
+                                    });
+
+            return chamadaViewModel.ToList();
+        }
     }
 }
